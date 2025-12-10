@@ -1,0 +1,1 @@
+## Repositório de estudos e anotações do curso **Introdução à Análise de Dados para Pesquisa no SUS**, oferecido pelo Campus Virtual Fiocruz.
