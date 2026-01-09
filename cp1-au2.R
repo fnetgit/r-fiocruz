@@ -25,19 +25,25 @@ class(string)    # "character"
 class(bool)      # "logical"
 
 # Converter tipos
-c <- as.integer(c)
-as.numeric(d)
 
-# Real para inteiro
-c <- 2.9
-class(c)
-c <- as.integer(c)
-class(c)
-# String para inteiro
-d <- "90"
-class(d)
-d <- as.numeric(d)
-class(d)
+# String para Inteiro ("50" -> 50)
+texto_50 <- "50"
+convertido <- as.integer(texto_50)
+print(convertido)
+
+# String para Numérico/Real ("90" -> 90)
+string_num <- "90"
+print(class(string_num)) # character
+
+string_num <- as.numeric(string_num)
+print(class(string_num)) # numeric
+
+# Real para Inteiro (2.9 -> 2)
+numreal <- 2.9
+print(class(numreal)) # numeric
+
+numreal <- as.integer(numreal)
+print(class(numreal)) # integer (truncado)
 
 # Outros tipos de objetos
 
@@ -55,7 +61,7 @@ print(matriz)
 
 
 # Funções
-nome_funcao(argumento1, argumento2)
+# nome_funcao(argumento1, argumento2)
 
 # R já vem com algumas funções embutidas:
 sum(1, 3)        # Calcula a soma de números.
@@ -74,20 +80,20 @@ is.numeric("10") # Verifica se algo é numérico.
 # Instalação
 # Opção 1: Instalação usando Tidyverse
 # O Tidyverse já inclui vários pacotes essenciais
-install.packages("tidyverse") # Inclui: dplyr, stringr, lubridate, readr, ggplot2 e outros
-install.packages("readxl")    # Leitura de arquivos Excel
-install.packages("arrow")     # Leitura de arquivos Parquet
+# install.packages("tidyverse") # Inclui: dplyr, stringr, lubridate, readr, ggplot2 e outros
+# install.packages("readxl")    # Leitura de arquivos Excel
+# install.packages("arrow")     # Leitura de arquivos Parquet
 
 # Opção 2: Instalação individual de cada pacote
-install.packages("dplyr")     # Manipulação de dados
-install.packages("stringr")   # Manipulação de strings/texto
-install.packages("lubridate") # Manipulação de datas
-install.packages("readr")     # Leitura de arquivos CSV
-install.packages("ggplot2")   # Criação de gráficos
-install.packages("tibble")    # Trabalhar com tibbles (dataframes modernos)
-install.packages("tidyr")     # Organização de dados
-install.packages("readxl")    # Leitura de arquivos Excel
-install.packages("arrow")     # Leitura de arquivos Parquet
+# install.packages("dplyr")     # Manipulação de dados
+# install.packages("stringr")   # Manipulação de strings/texto
+# install.packages("lubridate") # Manipulação de datas
+# install.packages("readr")     # Leitura de arquivos CSV
+# install.packages("ggplot2")   # Criação de gráficos
+# install.packages("tibble")    # Trabalhar com tibbles (dataframes modernos)
+# install.packages("tidyr")     # Organização de dados
+# install.packages("readxl")    # Leitura de arquivos Excel
+# install.packages("arrow")     # Leitura de arquivos Parquet
 
 # Carregamento
 # Para utilizar pacotes é necessário carregá-los:
@@ -133,23 +139,45 @@ getwd()
 
 # Importar arquivo CSV
 # read_csv é do pacote readr
-df_csv <- read_csv("sim_salvador_2023.csv")
+df_csv <- read_csv("data/sim_salvador_2023.csv")
 
 # Importar arquivo Excel
 # Requer pacote readxl
-df_xlsx <- read_excel("sim_salvador_2023.xlsx")
+# df_xlsx <- read_excel("data/sim_salvador_2023.xlsx")
 
 # Importar arquivo Parquet
 # Requer pacote arrow.
-df_parquet <- read_parquet("sim_salvador_2023.parquet")
+# df_parquet <- read_parquet("sim_salvador_2023.parquet")
 
 # Remover dataframes duplicados da memória
-rm(df_xlsx, df_parquet)
+# rm(df_xlsx, df_parquet)
 
 # Manipulação de Dados
 
 # Visualizar estrutura dos dados
 
 # A função glimpse() (do pacote dplyr/tidyverse) mostra um resumo dos dados
-# de forma que caiba na largura do seu console.
+# de forma que caiba na largura do seu console. Nome das variáveis, tipos e exemplos de valores
 glimpse(df_csv)
+
+# Visualizar primeiras linhas
+head(df_csv)
+
+# Visualizar últimas linhas
+tail(df_csv)
+
+# Resumo estatístico
+summary(df_csv)
+
+
+# Usando table() do R base
+table(df_csv$SEXO, useNA = "always") # Inclui valores ausentes
+
+# Usando count() do Tidyverse
+df_csv %>%
+  count(SEXO, sort = TRUE)
+
+# No dplyr, para criar novas variáveis ou alterar variáveis existentes utilizamos a função mutate
+# data_frame <- data_frame %>%
+#  mutate(nova_variavel  = expressão)
+
